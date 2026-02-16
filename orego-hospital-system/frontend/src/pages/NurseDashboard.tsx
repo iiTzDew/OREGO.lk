@@ -73,8 +73,8 @@ const NurseDashboard: React.FC = () => {
     setLoading(true);
     try {
       const [patientsRes, resourcesRes] = await Promise.all([
-        userService.getUsers(),
-        resourceService.getResources(),
+        userService.getPatients(),
+        resourceService.getAllResources(),
       ]);
       
       // Filter patients only
@@ -167,8 +167,6 @@ const NurseDashboard: React.FC = () => {
           <Grid item xs={12}>
             <NurseStats 
               refreshTrigger={refreshTrigger}
-              patients={patients}
-              resources={resources}
             />
           </Grid>
 
@@ -240,9 +238,7 @@ const NurseDashboard: React.FC = () => {
                 <Divider sx={{ mb: 2 }} />
                 <WardPatientList 
                   refreshTrigger={refreshTrigger}
-                  patients={patients.slice(0, 4)}
                   onRecordVitals={handleRecordVitals}
-                  compact
                 />
               </CardContent>
             </Card>
@@ -266,7 +262,6 @@ const NurseDashboard: React.FC = () => {
                 <Divider sx={{ mb: 2 }} />
                 <MedicationSchedule 
                   refreshTrigger={refreshTrigger}
-                  compact
                 />
               </CardContent>
             </Card>
@@ -294,7 +289,6 @@ const NurseDashboard: React.FC = () => {
             <Divider sx={{ mb: 2 }} />
             <WardPatientList 
               refreshTrigger={refreshTrigger}
-              patients={patients}
               onRecordVitals={handleRecordVitals}
             />
           </CardContent>
